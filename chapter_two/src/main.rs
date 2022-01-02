@@ -18,7 +18,7 @@ fn main() {
 
     let int_guess : u32 = match guess.trim().parse() {
         Ok(num) => num,
-        Err(_) => 0, // Use _ to explicitly ignore each field, and .. to ignore all fields
+        Err(_) => 0, // use _ to explicitly ignore each field, and .. to ignore all fields
     };
 
     match int_guess.cmp(&secret_number) {
