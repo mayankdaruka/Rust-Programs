@@ -11,6 +11,17 @@ struct Rectangle {
     height: u32,
 }
 
+// each struct can have multiple impl blocks but right now we don't need that
+impl Rectangle {
+    fn area(&self) -> u32 {
+        self.width * self.height
+    }
+
+    fn can_hold(&self, other_rect: &Rectangle) -> bool {
+        self.width >= other_rect.width && self.height >= other_rect.height
+    }
+}
+
 fn main() {
     let user1 = User {
         email: String::from("someone@example.com"),
@@ -50,6 +61,21 @@ fn main() {
     // takes ownership of the expression, prints file
     // and line number of macro call and resulting value of expression, then returns ownership of value
     dbg!(&rect1);
+
+    println!("rect1 area: {}", rect1.area());
+
+    // for calling methods in C/C++ there is a . and ->
+    // rust doesn't have ->, it handles this through automatic referencing and dereferencing
+    // following 2 statements below are the same thing
+    // p1.distance(&p2);
+    // (&p1).distance(&p2);
+
+    let rect2 = Rectangle {
+        height: 19,
+        width: 15,
+    };
+
+    println!("rect1 can hold rect2: {}", rect1.can_hold(&rect2));
 }
 
 fn calculate_area(rect: &Rectangle) -> u32 {
